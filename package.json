@@ -7,7 +7,10 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react_ujs": "^2.5.0",
+    "stream-chat-react": "^0.6.13",
+    "webpack-cli": "^3.3.6"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.7.2"

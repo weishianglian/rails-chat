@@ -1,24 +1,67 @@
-# README
+# Practice Tutorial: Dialogflow Chatbot with Ruby on Rails
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+> In this tutorial, we will build a chatbot interaction to Stream Chat using Ruby on Rails.
 
-Things you may want to cover:
+## Prerequisities:
+* Ruby on Rails
+* Javascript and React
+* Node
+* RVM
+* Ngrok
+* PostgreSQL
 
-* Ruby version
+## Steps:
+### Install Ruby on Rails
+    
+```bash
+rvm install 2.6.3
+```
 
-* System dependencies
+```bash
+# Create a gemset for isolating the dependencies
+rvm use --create 2.6.3@rails-chat
+```
 
-* Configuration
+```bash
+gem install rails 
+```
 
-* Database creation
+### Build the Applicaiton Skeleton with React and PostgreSQL
+```bash
+rails new rails-chat --webpack=react --database=postgresql
+```
 
-* Database initialization
+```bash
+cd rails-chat
+```
 
-* How to run the test suite
+### Add the dependencies to Gemfile
+```ruby
+gem 'webpacker'
+gem 'react-rails'
+gem 'stream-chat-ruby'
+gem 'google-cloud-dialogflow'
+gem 'bcrypt', '~> 3.1.7
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+```bash
+bundle install
+```
 
-* Deployment instructions
+```bash
+rails db:create
+```
 
-* ...
+```bash
+rails webpacker:install
+rails webpacker:install:react
+rails generate react:install
+yarn add webpack-cli stream-chat-react
+```
+
+
+**Reference:**
+* [Tutorial: Dialogflow Chatbot with Ruby on Rails](https://dev.to/mirceacosbuc/tutorial-dialogflow-chatbot-with-ruby-on-rails-3p87)
+* [Rails Chat Dialogflow Example](https://github.com/GetStream/rails-chat-dialogflow-example)
+* [Rails Check Sneak Peak Video](https://vimeo.com/346885809)
+* 

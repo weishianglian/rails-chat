@@ -59,9 +59,28 @@ rails generate react:install
 yarn add webpack-cli stream-chat-react
 ```
 
+### Add User to the Application
+```bash
+rails generate scaffold User handle:string name:string password:digest
+```
+
+### Add User model validation in _app/models/user.rb_
+```ruby
+# ...
+validates :handle, presence: true, uniqueness: true
+validates :name, presence: true
+```
+
+```bash
+rails db:migrate
+```
+
+```bash
+rails server
+```
+
 
 **Reference:**
 * [Tutorial: Dialogflow Chatbot with Ruby on Rails](https://dev.to/mirceacosbuc/tutorial-dialogflow-chatbot-with-ruby-on-rails-3p87)
 * [Rails Chat Dialogflow Example](https://github.com/GetStream/rails-chat-dialogflow-example)
 * [Rails Check Sneak Peak Video](https://vimeo.com/346885809)
-* 

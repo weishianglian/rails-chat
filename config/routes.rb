@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'chat#index'
+  get 'chat/index'
   get 'session/new'
   get 'session/create'
   get 'session/destroy'

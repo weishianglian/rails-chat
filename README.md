@@ -79,6 +79,63 @@ rails db:migrate
 rails server
 ```
 
+### Add session controller for logging in and out
+```bash
+rails generate controller session new create destroy
+```
+
+app/controllers/session_controller.rb
+```ruby
+class SessionController < ApplicationController
+  def new
+  end
+
+  def create
+    user = User.find_by_handle(params[:handle])
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      session[:chat_token] = @chat.create_token(user.handle)
+      redirect_to root_url, noticed: "Logged in!"
+    else
+      flash.now[:alert] = "Handle or password is invalid"
+      render "new"
+    end
+    
+    def destroy
+      session[:user_id] = nil
+      session[:chat_token] = nil
+      redirect_to root_url, noticed: "Logged out!"
+  end
+end
+```
+
+app/views/sessions/new.html.erb
+```html
+<p id="alert"><%= alert %></p>
+<h1>Login</h1>
+
+<%= form_tag session_path do |form| %>
+  <div class="field">
+    <%= label_tag :handle %>
+    <%= text_field_tag :handle %>
+  </div>
+  <div class="field">
+    <%= label_tag :password %>
+    <%= password_field_tag :password %>
+  </div>
+  <div class="actions">
+    <%= submit_tag "Login" %>
+  </div>
+<% end %>
+```
+
+config/routes.rb
+```ruby
+get 'signup', to: 'users#new', as: 'signup'
+get 'login', to: 'sessions#new', as: 'login'
+get 'logout', to: 'sessions#destroy', as: 'logout'
+```
+
 
 **Reference:**
 * [Tutorial: Dialogflow Chatbot with Ruby on Rails](https://dev.to/mirceacosbuc/tutorial-dialogflow-chatbot-with-ruby-on-rails-3p87)
